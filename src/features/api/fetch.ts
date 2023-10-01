@@ -3,7 +3,6 @@ import { Quiz } from "../entity/quiz/types";
 import { Course } from "../course/types";
 import { decodeAssignmentFromAPI } from "../entity/assignment/decode";
 import { decodeQuizFromAPI } from "../entity/quiz/decode";
-import { useCallback } from "react";
 
 /* Sakai のURLを取得する */
 export const getBaseURL = (): string => {

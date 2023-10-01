@@ -6,6 +6,8 @@ import { getFavoriteCourses } from "../features/course/getCourse";
 function ResourceItem(props: { course: Course }) {
     const [resources, setResources] = useState<Resource>();
     const [didGetResource, setDidGetResource] = useState(false);
+    const existsResource = !!resources && resources.getEntries().length > 0;
+    const isDisabled = !existsResource && didGetResource;
     const getResource = useCallback(async (course: Course) => fetchResource(course), []);
     const onClick = async () => {
         if (didGetResource) return;
@@ -15,9 +17,8 @@ function ResourceItem(props: { course: Course }) {
         setDidGetResource(true);
     };
     return (
-        <div>
-            <p>{props.course.name}</p>
-            {didGetResource ? null : <button onClick={onClick}>Get Resource</button>}
+        <details className={"cs-resources-item " + (isDisabled ? "disabled" : "")} onClick={onClick}>
+            <summary>{props.course.name}</summary>
             {resources && (
                 <ul>
                     {resources.getEntries().map((entry) => (
@@ -30,7 +31,8 @@ function ResourceItem(props: { course: Course }) {
                     ))}
                 </ul>
             )}
-        </div>
+            {isDisabled && <p>No Resources</p>}
+        </details>
     );
 }
 
@@ -39,7 +41,7 @@ export function ResourcesTab() {
     getFavoriteCourses().then((courses) => setCourses(courses));
 
     return (
-        <div>
+        <div className="cs-resources-tab">
             {courses?.map((course) => (
                 <ResourceItem key={course.id} course={course} />
             ))}

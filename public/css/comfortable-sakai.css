@@ -1,5 +1,3 @@
-
-
 .cs-tab-danger {
     background: var(--topDanger) !important;
     color: #333435 !important;
@@ -98,7 +96,7 @@
     top: 5px;
     right: 5px;
     font-size: 36px;
-    margin-left: 50px
+    margin-left: 50px;
 }
 
 .closebtn > img {
@@ -401,7 +399,7 @@
 }
 
 .cs-checkbox + label:before {
-    content: '';
+    content: "";
     display: inline-block;
     vertical-align: text-top;
     width: 15px;
@@ -429,7 +427,7 @@
 }
 
 .cs-checkbox:checked + label:after {
-    content: '';
+    content: "";
     position: absolute;
     left: 2.5px;
     top: 7px;
@@ -443,12 +441,14 @@
     margin-left: 5px;
 }
 
-.cs-tab *, .cs-tab *:before, .cs-tab *:after {
+.cs-tab *,
+.cs-tab *:before,
+.cs-tab *:after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-.cs-tab > input[type='radio'] {
+.cs-tab > input[type="radio"] {
     margin: 0;
     padding: 0;
     border: none;
@@ -479,7 +479,7 @@
     cursor: pointer;
     border-bottom: 0;
     border-radius: 6px 6px 0 0;
-    border-color: #9b9898
+    border-color: #9b9898;
 }
 
 .cs-tab > input:checked + label {
@@ -522,7 +522,8 @@
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
 }
 
 .cs-badge-memo {
@@ -609,7 +610,8 @@
     padding-top: 20px;
 }
 
-.cs-loading, .cs-loading:after {
+.cs-loading,
+.cs-loading:after {
     border-radius: 50% !important;
     width: 25px !important;
     height: 25px !important;
@@ -673,7 +675,7 @@
     border-image: initial;
 }
 
-.cs-version{
+.cs-version {
     padding-left: 5px;
     font-weight: bold;
 }
@@ -732,7 +734,7 @@
 }
 
 .cs-toggle-slider:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 5px;
     left: 5px;
@@ -743,12 +745,68 @@
     transition: 0.3s;
 }
 
+.cs-resources-tab {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin: 10px;
+}
+.cs-resources-item {
+    margin-bottom: 7px;
+    border: 2px solid #6483d3;
+    border-radius: 5px;
+}
+
+.cs-resources-item.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    border: 2px solid #818181;
+}
+.cs-resources-item.disabled summary {
+    color: #818181;
+}
+
+.cs-resources-item summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 1em 1.5em;
+    background-position: right calc(2em - 7px) center;
+    background-size: 22px;
+    background-repeat: no-repeat;
+    color: #6483d3;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cs-resources-item summary::-webkit-details-marker {
+    display: none;
+}
+sources-item[open] summary::after {
+    transform: rotate(225deg);
+}
+.cs-resources-item ul,
+p {
+    transform: translateY(-10px);
+    opacity: 0;
+    margin: 0;
+    padding: 0 2em 1.5em;
+    color: #333333;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.cs-resources-item[open] > ul,
+p {
+    transform: none;
+    opacity: 1;
+}
+
 input:checked + .cs-toggle-slider {
-    background-color: #2196F3;
+    background-color: #2196f3;
 }
 
 input:checked + .cs-toggle-slider:after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
 }
-
