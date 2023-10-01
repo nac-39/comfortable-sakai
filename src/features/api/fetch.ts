@@ -15,21 +15,21 @@ export const getBaseURL = (): string => {
     return baseURL;
 };
 
-// export const fetchFavoriteCourse = (): Promise<Array<Course>> => {
-//     const baseURL = getBaseURL();
-//     const fetchURL = baseURL + "/portal/favorites/list.json";
-//     return new Promise((resolve, reject) => {
-//         fetch(fetchURL, { cache: "no-cache" }).then(async (response) => {
-//             if (response.ok) {
-//                 const data = await response.json();
-//                 const courses = data;
-//                 resolve(courses);
-//             } else {
-//                 reject(`Request failed: ${response.status}`)
-//             }
-//         }).catch((err) => console.error(err))
-//     });
-// }
+export const fetchFavoriteCourseIds = (): Promise<Array<string>> => {
+    const baseURL = getBaseURL();
+    const fetchURL = baseURL + "/portal/favorites/list.json";
+    return new Promise((resolve, reject) => {
+        fetch(fetchURL, { cache: "no-cache" }).then(async (res) => {
+            if (res.ok) {
+                const data = await res.json();
+                const courses = data.favoriteSiteIds;
+                resolve(courses);
+            } else {
+                reject(`Request failed: ${res.status}`);
+            }
+        });
+    });
+};
 
 /* Sakai のお気に入り欄からCourseを取得する */
 export const fetchCourse = (): Array<Course> => {

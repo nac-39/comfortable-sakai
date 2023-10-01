@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
-import { getSakaiCourses } from "../features/course/getCourse";
 import { Resource, fetchResource } from "../features/api/fetch";
 import { Course } from "../features/course/types";
+import { getFavoriteCourses } from "../features/course/getCourse";
 
 function ResourceItem(props: { course: Course }) {
     const [resources, setResources] = useState<Resource>();
@@ -28,7 +28,6 @@ function ResourceItem(props: { course: Course }) {
                             </a>
                         </li>
                     ))}
-                    ;
                 </ul>
             )}
         </div>
@@ -36,13 +35,14 @@ function ResourceItem(props: { course: Course }) {
 }
 
 export function ResourcesTab() {
-    const courses = getSakaiCourses();
+    const [courses, setCourses] = useState<Course[]>();
+    getFavoriteCourses().then((courses) => setCourses(courses));
 
     return (
         <div>
-            {courses?.map((course) => {
-                return <ResourceItem key={course.id} course={course} />;
-            })}
+            {courses?.map((course) => (
+                <ResourceItem key={course.id} course={course} />
+            ))}
         </div>
     );
 }
