@@ -44,7 +44,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "boolean",
                         id: "appInfo.useDarkTheme",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -56,7 +56,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "boolean",
                         id: "miniSakaiOption.showCompletedEntry",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -67,7 +67,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "boolean",
                         id: "miniSakaiOption.showLateAcceptedEntry",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -78,7 +78,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "number",
                         id: "cacheInterval.assignment",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -89,7 +89,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "number",
                         id: "cacheInterval.quiz",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -101,7 +101,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.topDanger",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -112,7 +112,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.topWarning",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -123,7 +123,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.topSuccess",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -134,7 +134,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.topOther",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -146,7 +146,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.miniDanger",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -157,7 +157,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.miniWarning",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -168,7 +168,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.miniSuccess",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -179,7 +179,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
                     props.onSettingsChange({
                         type: "string",
                         id: "color.miniOther",
-                        newValue: v
+                        newValue: v,
                     })
                 }
             />
@@ -187,7 +187,7 @@ export function SettingsTab(props: { onSettingsChange: (change: SettingsChange) 
             <ResetColorButton
                 onClick={() =>
                     props.onSettingsChange({
-                        type: "reset-color"
+                        type: "reset-color",
                     })
                 }
             />

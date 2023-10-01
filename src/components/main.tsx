@@ -3,6 +3,7 @@ import { useTranslation } from "./helper";
 import { formatTimestamp, getEntities, updateIsReadFlag } from "../utils";
 import { EntityUnion, EntryTab, EntryUnion, MemoAddInfo } from "./entryTab";
 import { SettingsChange, SettingsTab } from "./settings";
+import { ResourcesTab } from "./resources";
 import _ from "lodash";
 import { applyColorSettings, toggleMiniSakai } from "../minisakai";
 import { Settings } from "../features/setting/types";
@@ -19,14 +20,14 @@ import { getSakaiCourses } from "../features/course/getCourse";
 export const MiniSakaiContext = React.createContext<{
     settings: Settings;
 }>({
-    settings: new Settings()
+    settings: new Settings(),
 });
 
 type MiniSakaiRootProps = { subset: boolean; hostname: string };
 type MiniSakaiRootState = {
     settings: Settings;
     entities: EntityUnion[];
-    shownTab: "assignment" | "settings";
+    shownTab: "assignment" | "settings" | "resources";
     memoBoxShown: boolean;
 };
 
@@ -37,7 +38,7 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
             settings: new Settings(),
             entities: new Array<EntityUnion>(),
             shownTab: "assignment",
-            memoBoxShown: false
+            memoBoxShown: false,
         };
 
         this.onCheck = this.onCheck.bind(this);
@@ -59,7 +60,7 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
         getEntities(this.state.settings, getSakaiCourses(), cacheOnly).then((entities) => {
             const allEntities = [...entities.assignment, ...entities.quiz, ...entities.memo];
             this.setState({
-                entities: allEntities
+                entities: allEntities,
             });
             updateIsReadFlag(window.location.href, entities.assignment, this.props.hostname);
         });
@@ -93,7 +94,7 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
             newSettings.color = _settings.color;
             saveSettings(this.state.settings.appInfo.hostname, newSettings).then(() => {
                 this.setState({
-                    settings: newSettings
+                    settings: newSettings,
                 });
             });
             return;
@@ -102,7 +103,7 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
         _.set(newSettings, change.id, change.newValue);
         saveSettings(this.state.settings.appInfo.hostname, newSettings).then(() => {
             this.setState({
-                settings: newSettings
+                settings: newSettings,
             });
         });
     }
@@ -111,7 +112,7 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
         if (!_.isEqual(prevState.entities, this.state.entities)) {
             getStoredSettings(this.props.hostname).then((s) => {
                 this.setState({
-                    settings: s
+                    settings: s,
                 });
                 addFavoritedCourseSites(getBaseURL()).then(() => {
                     resetFavoritesBar();
@@ -129,11 +130,12 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
     render(): React.ReactNode {
         const entryTabShown = this.state.shownTab === "assignment";
         const settingsTabShown = this.state.shownTab === "settings";
+        const resourcesTabShown = this.state.shownTab === "resources";
 
         return (
             <MiniSakaiContext.Provider
                 value={{
-                    settings: this.state.settings
+                    settings: this.state.settings,
                 }}
             >
                 <MiniSakaiLogo />
@@ -144,12 +146,17 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
                         <MiniSakaiTabs
                             onAssignment={() =>
                                 this.setState({
-                                    shownTab: "assignment"
+                                    shownTab: "assignment",
                                 })
                             }
                             onSettings={() =>
                                 this.setState({
-                                    shownTab: "settings"
+                                    shownTab: "settings",
+                                })
+                            }
+                            onResources={() =>
+                                this.setState({
+                                    shownTab: "resources",
                                 })
                             }
                             selection={this.state.shownTab}
@@ -157,11 +164,11 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
                         {this.state.shownTab === "assignment" ? (
                             <>
                                 <button
-                                    id='cs-add-memo-btn'
+                                    id="cs-add-memo-btn"
                                     onClick={() => {
                                         this.setState((state) => {
                                             return {
-                                                memoBoxShown: !state.memoBoxShown
+                                                memoBoxShown: !state.memoBoxShown,
                                             };
                                         });
                                     }}
@@ -188,6 +195,7 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
                 {settingsTabShown ? (
                     <SettingsTab settings={this.state.settings} onSettingsChange={this.onSettingsChange} />
                 ) : null}
+                {resourcesTabShown ? <ResourcesTab /> : null}
             </MiniSakaiContext.Provider>
         );
     }
@@ -195,12 +203,12 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
 
 function MiniSakaiLogo() {
     const src = chrome.runtime.getURL("img/logo.png");
-    return <img className='cs-minisakai-logo' alt='logo' src={src} />;
+    return <img className="cs-minisakai-logo" alt="logo" src={src} />;
 }
 
 function MiniSakaiVersion() {
     const ctx = useContext(MiniSakaiContext);
-    return <p className='cs-version'>Version {ctx.settings.appInfo.version}</p>;
+    return <p className="cs-version">Version {ctx.settings.appInfo.version}</p>;
 }
 
 function MiniSakaiClose(props: { onClose: () => void }) {
@@ -214,30 +222,40 @@ function MiniSakaiClose(props: { onClose: () => void }) {
 function MiniSakaiTabs(props: {
     onAssignment: () => void;
     onSettings: () => void;
-    selection: "assignment" | "settings";
+    onResources: () => void;
+    selection: "assignment" | "settings" | "resources";
 }) {
     const assignmentTab = useTranslation("tab_assignments");
     const settingsTab = useTranslation("tab_settings");
     const assignmentChecked = props.selection === "assignment";
     const settingsChecked = props.selection === "settings";
+    const resourcesChecked = props.selection === "resources";
     return (
         <>
             <input
-                id='assignmentTab'
-                type='radio'
-                name='cs-tab'
+                id="assignmentTab"
+                type="radio"
+                name="cs-tab"
                 onClick={props.onAssignment}
                 defaultChecked={assignmentChecked}
             />
-            <label htmlFor='assignmentTab'> {assignmentTab} </label>
+            <label htmlFor="assignmentTab"> {assignmentTab} </label>
             <input
-                id='settingsTab'
-                type='radio'
-                name='cs-tab'
+                id="settingsTab"
+                type="radio"
+                name="cs-tab"
                 onClick={props.onSettings}
                 defaultChecked={settingsChecked}
             />
-            <label htmlFor='settingsTab'> {settingsTab} </label>
+            <label htmlFor="settingsTab"> {settingsTab} </label>
+            <input
+                id="resourcesTab"
+                type="radio"
+                name="cs-tab"
+                onClick={props.onResources}
+                defaultChecked={resourcesChecked}
+            />
+            <label htmlFor="resourcesTab"> Resources </label>
         </>
     );
 }
@@ -245,8 +263,8 @@ function MiniSakaiTabs(props: {
 function MiniSakaiTimeBox(props: { clazz: string; title: string; time: string }) {
     return (
         <div className={props.clazz}>
-            <p className='cs-assignment-time-text'>{props.title}</p>
-            <p className='cs-assignment-time-text'>{props.time}</p>
+            <p className="cs-assignment-time-text">{props.title}</p>
+            <p className="cs-assignment-time-text">{props.time}</p>
         </div>
     );
 }
@@ -255,12 +273,12 @@ function MiniSakaiAssignmentTime() {
     const ctx = useContext(MiniSakaiContext);
     const title = useTranslation("assignment_acquisition_date");
     const time = formatTimestamp(ctx.settings.fetchTime.assignment);
-    return <MiniSakaiTimeBox clazz='cs-assignment-time' title={title} time={time} />;
+    return <MiniSakaiTimeBox clazz="cs-assignment-time" title={title} time={time} />;
 }
 
 function MiniSakaiQuizTime() {
     const ctx = useContext(MiniSakaiContext);
     const title = useTranslation("testquiz_acquisition_date");
     const time = formatTimestamp(ctx.settings.fetchTime.quiz);
-    return <MiniSakaiTimeBox clazz='cs-quiz-time' title={title} time={time} />;
+    return <MiniSakaiTimeBox clazz="cs-quiz-time" title={title} time={time} />;
 }
