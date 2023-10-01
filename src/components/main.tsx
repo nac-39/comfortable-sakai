@@ -192,10 +192,10 @@ export class MiniSakaiRoot extends React.Component<MiniSakaiRootProps, MiniSakai
                         onDelete={this.onMemoDelete}
                     />
                 ) : null}
+                {resourcesTabShown ? <ResourcesTab /> : null}
                 {settingsTabShown ? (
                     <SettingsTab settings={this.state.settings} onSettingsChange={this.onSettingsChange} />
                 ) : null}
-                {resourcesTabShown ? <ResourcesTab /> : null}
             </MiniSakaiContext.Provider>
         );
     }
@@ -227,6 +227,7 @@ function MiniSakaiTabs(props: {
 }) {
     const assignmentTab = useTranslation("tab_assignments");
     const settingsTab = useTranslation("tab_settings");
+    const resourcesTab = useTranslation("tab_resources");
     const assignmentChecked = props.selection === "assignment";
     const settingsChecked = props.selection === "settings";
     const resourcesChecked = props.selection === "resources";
@@ -241,6 +242,14 @@ function MiniSakaiTabs(props: {
             />
             <label htmlFor="assignmentTab"> {assignmentTab} </label>
             <input
+                id="resourcesTab"
+                type="radio"
+                name="cs-tab"
+                onClick={props.onResources}
+                defaultChecked={resourcesChecked}
+            />
+            <label htmlFor="resourcesTab"> {resourcesTab} </label>
+            <input
                 id="settingsTab"
                 type="radio"
                 name="cs-tab"
@@ -248,14 +257,6 @@ function MiniSakaiTabs(props: {
                 defaultChecked={settingsChecked}
             />
             <label htmlFor="settingsTab"> {settingsTab} </label>
-            <input
-                id="resourcesTab"
-                type="radio"
-                name="cs-tab"
-                onClick={props.onResources}
-                defaultChecked={resourcesChecked}
-            />
-            <label htmlFor="resourcesTab"> Resources </label>
         </>
     );
 }

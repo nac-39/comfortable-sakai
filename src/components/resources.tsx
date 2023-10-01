@@ -2,12 +2,14 @@ import React, { useCallback, useState } from "react";
 import { Resource, fetchResource } from "../features/api/fetch";
 import { Course } from "../features/course/types";
 import { getFavoriteCourses } from "../features/course/getCourse";
+import { useTranslation } from "./helper";
 
 function ResourceItem(props: { course: Course }) {
     const [resources, setResources] = useState<Resource>();
     const [didGetResource, setDidGetResource] = useState(false);
     const existsResource = !!resources && resources.getEntries().length > 0;
     const isDisabled = !existsResource && didGetResource;
+    const disabledText = useTranslation("resources_disabled");
     const getResource = useCallback(async (course: Course) => fetchResource(course), []);
     const onClick = async () => {
         if (didGetResource) return;
@@ -31,7 +33,7 @@ function ResourceItem(props: { course: Course }) {
                     ))}
                 </ul>
             )}
-            {isDisabled && <p>No Resources</p>}
+            {isDisabled && <p>{disabledText}</p>}
         </details>
     );
 }

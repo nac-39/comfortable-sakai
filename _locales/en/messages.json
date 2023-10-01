@@ -1,60 +1,70 @@
 {
-  "EXTENSION_DESCRIPTION": {"message": "Comfortable Sakai is a Web browser extension for managing assignments and quizzes on Sakai LMS."},
-  "tab_assignments": {"message": "Assignments"},
-  "tab_settings": {"message": "Settings"},
-  "todo_box_course_name": {"message": "Course Name"},
-  "todo_box_memo": {"message": "Memo"},
-  "todo_box_due_date": {"message": "Due Date"},
-  "todo_box_add": {"message": "Add Memo"},
-  "quiz": {"message": "Quiz"},
-  "memo": {"message": "Memo"},
-  "late": {"message": "Late Subm."},
-  "settings_enable_dark_theme": {"message": "Enable Dark theme"},
-  "settings_assignment_cache": {"message": "Assignment Cache [sec]"},
-  "settings_quizzes_cache": {"message": "Test&Quizzes Cache [sec]"},
-  "settings_color_checked_item": {"message": "Color course tabs including checked items"},
-  "settings_display_late_submit_assignment": {"message": "Show assignments that can be submitted late"},
-  "settings_reset_colors": {"message": "Reset to default colors"},
-  "settings_colors_hour": { "message": "[$color_type$] $time$ hours before due",
-    "placeholders": {
-      "color_type": { "content": "$1" },
-      "time": { "content": "$2" }
+    "EXTENSION_DESCRIPTION": {
+        "message": "Comfortable Sakai is a Web browser extension for managing assignments and quizzes on Sakai LMS."
+    },
+    "tab_assignments": { "message": "Assignments" },
+    "tab_settings": { "message": "Settings" },
+    "tab_resources": { "message": "Resources" },
+    "todo_box_course_name": { "message": "Course Name" },
+    "todo_box_memo": { "message": "Memo" },
+    "todo_box_due_date": { "message": "Due Date" },
+    "todo_box_add": { "message": "Add Memo" },
+    "quiz": { "message": "Quiz" },
+    "memo": { "message": "Memo" },
+    "late": { "message": "Late Subm." },
+    "settings_enable_dark_theme": { "message": "Enable Dark theme" },
+    "settings_assignment_cache": { "message": "Assignment Cache [sec]" },
+    "settings_quizzes_cache": { "message": "Test&Quizzes Cache [sec]" },
+    "settings_color_checked_item": { "message": "Color course tabs including checked items" },
+    "settings_display_late_submit_assignment": { "message": "Show assignments that can be submitted late" },
+    "settings_reset_colors": { "message": "Reset to default colors" },
+    "settings_colors_hour": {
+        "message": "[$color_type$] $time$ hours before due",
+        "placeholders": {
+            "color_type": { "content": "$1" },
+            "time": { "content": "$2" }
+        }
+    },
+    "settings_colors_day": {
+        "message": "[$color_type$] $time$ days before due",
+        "placeholders": {
+            "color_type": { "content": "$1" },
+            "time": { "content": "$2" }
+        }
+    },
+    "settings_colors_day_more": {
+        "message": "[$color_type$] $time$+ days before due",
+        "placeholders": {
+            "color_type": { "content": "$1" },
+            "time": { "content": "$2" }
+        }
+    },
+    "assignment_acquisition_date": { "message": "Assignment Acquisition Date: " },
+    "testquiz_acquisition_date": { "message": "Test&Quiz Acquisition Date: " },
+    "due24h": { "message": "Due within 24hrs" },
+    "due5d": { "message": "Due within 5days" },
+    "due14d": { "message": "Due within 14days" },
+    "duePassed": { "message": "Late submission possible" },
+    "dueOver14d": { "message": "Others" },
+    "no_available_assignments": { "message": "There are no available assignments :)" },
+    "remain_time": {
+        "message": "$days$d, $hours$hr, $minutes$min left.",
+        "placeholders": {
+            "days": { "content": "$1" },
+            "hours": { "content": "$2" },
+            "minutes": { "content": "$3" }
+        }
+    },
+    "due_not_set": {
+        "message": "Due date not set."
+    },
+    "favorites": {
+        "message": "All favorite Sites are added to top bar by $name$",
+        "placeholders": {
+            "name": { "content": "$1" }
+        }
+    },
+    "resources_disabled": {
+        "message": "No resources."
     }
-  },
-  "settings_colors_day": { "message": "[$color_type$] $time$ days before due",
-    "placeholders": {
-      "color_type": { "content": "$1" },
-      "time": { "content": "$2" }
-    }
-  },
-  "settings_colors_day_more": { "message": "[$color_type$] $time$+ days before due",
-    "placeholders": {
-      "color_type": { "content": "$1" },
-      "time": { "content": "$2" }
-    }
-  },
-  "assignment_acquisition_date": {"message": "Assignment Acquisition Date: "},
-  "testquiz_acquisition_date": {"message": "Test&Quiz Acquisition Date: "},
-  "due24h": {"message": "Due within 24hrs"},
-  "due5d": {"message": "Due within 5days"},
-  "due14d": {"message": "Due within 14days"},
-  "duePassed": {"message": "Late submission possible"},
-  "dueOver14d": {"message": "Others"},
-  "no_available_assignments": {"message": "There are no available assignments :)"},
-  "remain_time": { "message": "$days$d, $hours$hr, $minutes$min left.",
-    "placeholders": {
-      "days": { "content": "$1" },
-      "hours": { "content": "$2" },
-      "minutes": { "content": "$3" }
-    }
-  },
-  "due_not_set": {
-    "message": "Due date not set."
-  },
-  "favorites": {
-    "message": "All favorite Sites are added to top bar by $name$",
-    "placeholders": {
-      "name": { "content": "$1" }
-    }
-  }
 }
