@@ -2,6 +2,7 @@ import { Quiz, QuizEntry } from "./types";
 import { Course } from "../../course/types";
 import { CurrentTime, MaxTimestamp } from "../../../constant";
 
+
 /**
  * Decode Quiz data from Sakai REST API to QuizEntry array.
  * @param data - Data from Sakai REST API.
