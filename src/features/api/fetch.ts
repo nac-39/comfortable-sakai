@@ -111,7 +111,6 @@ const decodeResourceFromAPI = (data: any): Array<ResourceEntry> => {
             resourceEntries.push(resource);
         }
     });
-    console.log(resourceEntries);
     return resourceEntries;
 };
 
