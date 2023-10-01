@@ -787,7 +787,7 @@ sources-item[open] summary::after {
     transform: rotate(225deg);
 }
 .cs-resources-item ul,
-p {
+.cs-resources-item > p {
     transform: translateY(-10px);
     opacity: 0;
     margin: 0;
@@ -797,7 +797,7 @@ p {
 }
 
 .cs-resources-item[open] > ul,
-p {
+.cs-resources-item[open] > p {
     transform: none;
     opacity: 1;
 }
