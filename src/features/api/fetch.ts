@@ -1,8 +1,10 @@
 import { Assignment } from "../entity/assignment/types";
 import { Quiz } from "../entity/quiz/types";
 import { Course } from "../course/types";
+import { Resource } from "../entity/resource/types";
 import { decodeAssignmentFromAPI } from "../entity/assignment/decode";
 import { decodeQuizFromAPI } from "../entity/quiz/decode";
+import { decodeResourceFromAPI } from "../entity/resource/decode";
 
 /* Sakai のURLを取得する */
 export const getBaseURL = (): string => {
@@ -86,33 +88,8 @@ export const fetchQuiz = (course: Course): Promise<Quiz> => {
             .catch((err) => console.error(err)); // Error: Request failed: 404
     });
 };
-type ResourceEntry = {
-    title: string;
-    url: string;
-    type: string;
-};
 
-export class Resource {
-    constructor(public course: Course, public entries: Array<ResourceEntry>, public isRead: boolean) { }
-    getEntries(): Array<ResourceEntry> {
-        return this.entries;
-    }
-}
 
-const decodeResourceFromAPI = (data: any): Array<ResourceEntry> => {
-    const resourceEntries: Array<ResourceEntry> = [];
-    data.content_collection.forEach((item: any) => {
-        if (item.type !== "collection") {
-            const resource: ResourceEntry = {
-                title: item.entityTitle,
-                url: item.url,
-                type: item.type,
-            };
-            resourceEntries.push(resource);
-        }
-    });
-    return resourceEntries;
-};
 
 /* Sakai APIからリソースを取得する */
 export const fetchResource = (course: Course): Promise<Resource> => {
